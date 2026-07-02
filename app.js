@@ -81,8 +81,320 @@ const aliases = {
   "refused to apologise": "apology refused"
 };
 
+const languages = {
+  en: "English",
+  pl: "Polski",
+  es: "Español"
+};
+
+const translations = {
+  en: {
+    appSubtitle: "Behaviour, XP and rewards",
+    login: "Log in",
+    account: "Account",
+    pin: "PIN",
+    createAccount: "Create account",
+    createNewAccount: "Create new account",
+    parentName: "Parent name",
+    parent: "Parent",
+    email: "Email",
+    createPin: "Create PIN",
+    child: "Child",
+    childName: "Child name",
+    age: "Age",
+    accountSuffix: "account",
+    tabs: { log: "Log", week: "Week", rewards: "Rewards", more: "More" },
+    day: "Day",
+    total: "total",
+    remove: "Remove",
+    nothingRecorded: "Nothing recorded yet.",
+    recordBehaviour: "Record behaviour",
+    shown: "shown",
+    notes: "Notes",
+    saveNote: "Save note",
+    weeklySummary: "Weekly summary",
+    dailyAverage: "Daily average",
+    noBehavioursYet: "No behaviours yet",
+    currentReward: "Current reward",
+    unlocked: "{child} has unlocked a reward.",
+    notUnlocked: "{child} has not unlocked a reward yet.",
+    addOwnReward: "Add your own reward",
+    reward: "Reward",
+    minXp: "Min XP",
+    maxXp: "Max XP",
+    addReward: "Add reward",
+    resetDefaults: "Reset defaults",
+    rewardLevels: "Reward levels",
+    addOwnBehaviour: "Add your own behaviour",
+    name: "Name",
+    category: "Category",
+    type: "Type",
+    points: "Points",
+    addBehaviour: "Add behaviour",
+    behaviourCatalogue: "Behaviour catalogue",
+    restoreHidden: "Restore hidden behaviours",
+    weekTools: "Week tools",
+    archiveWeek: "Save week and start fresh",
+    pastWeeks: "Past weeks",
+    noPastWeeks: "No past weeks yet.",
+    logout: "Log out",
+    all: "All",
+    bonus: "Bonus",
+    deduction: "Deduction",
+    deductions: "Deductions",
+    wrongPin: "Wrong PIN.",
+    custom: "Custom",
+    placeholders: {
+      reward: "Choose movie night",
+      behaviour: "Packed school bag",
+      category: "Responsibility"
+    },
+    days: {
+      monday: "Monday",
+      tuesday: "Tuesday",
+      wednesday: "Wednesday",
+      thursday: "Thursday",
+      friday: "Friday",
+      saturday: "Saturday",
+      sunday: "Sunday"
+    },
+    shortDays: {
+      monday: "Mon",
+      tuesday: "Tue",
+      wednesday: "Wed",
+      thursday: "Thu",
+      friday: "Fri",
+      saturday: "Sat",
+      sunday: "Sun"
+    }
+  },
+  pl: {
+    appSubtitle: "Zachowanie, XP i nagrody",
+    login: "Zaloguj",
+    account: "Konto",
+    pin: "PIN",
+    createAccount: "Utwórz konto",
+    createNewAccount: "Utwórz nowe konto",
+    parentName: "Imię rodzica",
+    parent: "Rodzic",
+    email: "Email",
+    createPin: "Utwórz PIN",
+    child: "Dziecko",
+    childName: "Imię dziecka",
+    age: "Wiek",
+    accountSuffix: "konto",
+    tabs: { log: "Dzień", week: "Tydzień", rewards: "Nagrody", more: "Więcej" },
+    day: "Dzień",
+    total: "razem",
+    remove: "Usuń",
+    nothingRecorded: "Jeszcze nic nie dodano.",
+    recordBehaviour: "Dodaj zachowanie",
+    shown: "widoczne",
+    notes: "Notatki",
+    saveNote: "Zapisz notatkę",
+    weeklySummary: "Podsumowanie tygodnia",
+    dailyAverage: "Średnia dzienna",
+    noBehavioursYet: "Brak zachowań",
+    currentReward: "Aktualna nagroda",
+    unlocked: "{child} odblokował nagrodę.",
+    notUnlocked: "{child} jeszcze nie odblokował nagrody.",
+    addOwnReward: "Dodaj własną nagrodę",
+    reward: "Nagroda",
+    minXp: "Min XP",
+    maxXp: "Max XP",
+    addReward: "Dodaj nagrodę",
+    resetDefaults: "Przywróć domyślne",
+    rewardLevels: "Poziomy nagród",
+    addOwnBehaviour: "Dodaj własne zachowanie",
+    name: "Nazwa",
+    category: "Kategoria",
+    type: "Typ",
+    points: "Punkty",
+    addBehaviour: "Dodaj zachowanie",
+    behaviourCatalogue: "Lista zachowań",
+    restoreHidden: "Przywróć ukryte zachowania",
+    weekTools: "Narzędzia tygodnia",
+    archiveWeek: "Zapisz tydzień i zacznij od nowa",
+    pastWeeks: "Poprzednie tygodnie",
+    noPastWeeks: "Brak zapisanych tygodni.",
+    logout: "Wyloguj",
+    all: "Wszystkie",
+    bonus: "Plus",
+    deduction: "Minus",
+    deductions: "Minusy",
+    wrongPin: "Zły PIN.",
+    custom: "Własne",
+    placeholders: {
+      reward: "Wybiera wieczór filmowy",
+      behaviour: "Spakowany plecak",
+      category: "Odpowiedzialność"
+    },
+    days: {
+      monday: "Poniedziałek",
+      tuesday: "Wtorek",
+      wednesday: "Środa",
+      thursday: "Czwartek",
+      friday: "Piątek",
+      saturday: "Sobota",
+      sunday: "Niedziela"
+    },
+    shortDays: {
+      monday: "Pon",
+      tuesday: "Wt",
+      wednesday: "Śr",
+      thursday: "Czw",
+      friday: "Pt",
+      saturday: "Sob",
+      sunday: "Nd"
+    }
+  },
+  es: {
+    appSubtitle: "Conducta, XP y recompensas",
+    login: "Entrar",
+    account: "Cuenta",
+    pin: "PIN",
+    createAccount: "Crear cuenta",
+    createNewAccount: "Crear cuenta nueva",
+    parentName: "Nombre del padre/madre",
+    parent: "Padre/madre",
+    email: "Email",
+    createPin: "Crear PIN",
+    child: "Niño/a",
+    childName: "Nombre del niño/a",
+    age: "Edad",
+    accountSuffix: "cuenta",
+    tabs: { log: "Día", week: "Semana", rewards: "Premios", more: "Más" },
+    day: "Día",
+    total: "total",
+    remove: "Quitar",
+    nothingRecorded: "Nada registrado todavía.",
+    recordBehaviour: "Registrar conducta",
+    shown: "visibles",
+    notes: "Notas",
+    saveNote: "Guardar nota",
+    weeklySummary: "Resumen semanal",
+    dailyAverage: "Media diaria",
+    noBehavioursYet: "Sin conductas todavía",
+    currentReward: "Premio actual",
+    unlocked: "{child} ha desbloqueado un premio.",
+    notUnlocked: "{child} todavía no ha desbloqueado un premio.",
+    addOwnReward: "Añade tu propio premio",
+    reward: "Premio",
+    minXp: "XP mín.",
+    maxXp: "XP máx.",
+    addReward: "Añadir premio",
+    resetDefaults: "Restaurar",
+    rewardLevels: "Niveles de premios",
+    addOwnBehaviour: "Añade tu propia conducta",
+    name: "Nombre",
+    category: "Categoría",
+    type: "Tipo",
+    points: "Puntos",
+    addBehaviour: "Añadir conducta",
+    behaviourCatalogue: "Catálogo de conductas",
+    restoreHidden: "Restaurar conductas ocultas",
+    weekTools: "Herramientas de semana",
+    archiveWeek: "Guardar semana y empezar de nuevo",
+    pastWeeks: "Semanas anteriores",
+    noPastWeeks: "No hay semanas guardadas.",
+    logout: "Cerrar sesión",
+    all: "Todo",
+    bonus: "Bonus",
+    deduction: "Descuento",
+    deductions: "Descuentos",
+    wrongPin: "PIN incorrecto.",
+    custom: "Personalizado",
+    placeholders: {
+      reward: "Elegir noche de película",
+      behaviour: "Mochila preparada",
+      category: "Responsabilidad"
+    },
+    days: {
+      monday: "Lunes",
+      tuesday: "Martes",
+      wednesday: "Miércoles",
+      thursday: "Jueves",
+      friday: "Viernes",
+      saturday: "Sábado",
+      sunday: "Domingo"
+    },
+    shortDays: {
+      monday: "Lun",
+      tuesday: "Mar",
+      wednesday: "Mié",
+      thursday: "Jue",
+      friday: "Vie",
+      saturday: "Sáb",
+      sunday: "Dom"
+    }
+  }
+};
+
+const translatedText = {
+  "No weekly reward yet": {
+    pl: "Jeszcze bez nagrody tygodniowej",
+    es: "Sin premio semanal todavía"
+  },
+  "Small treat with Mum": {
+    pl: "Mała przyjemność z Mamą",
+    es: "Pequeño capricho con mamá"
+  },
+  "Extra screen-time pass": {
+    pl: "Bonusowy czas ekranowy",
+    es: "Pase de tiempo extra de pantalla"
+  },
+  "Pick a weekend activity": {
+    pl: "Wybiera aktywność na weekend",
+    es: "Elegir una actividad del finde"
+  },
+  "Choose a family night": {
+    pl: "Wybiera rodzinny wieczór",
+    es: "Elegir una noche familiar"
+  },
+  "Responsibility": { pl: "Odpowiedzialność", es: "Responsabilidad" },
+  "Kindness": { pl: "Życzliwość", es: "Amabilidad" },
+  "Self-control": { pl: "Samokontrola", es: "Autocontrol" },
+  "Honesty": { pl: "Szczerość", es: "Honestidad" },
+  "Respect": { pl: "Szacunek", es: "Respeto" },
+  "Bed made": { pl: "Pościelone łóżko", es: "Cama hecha" },
+  "Bedroom tidy": { pl: "Pokój posprzątany", es: "Habitación ordenada" },
+  "Buddy walked": { pl: "Buddy wyprowadzony", es: "Paseó a Buddy" },
+  "Helped Mum without asking": { pl: "Pomógł Mamie bez proszenia", es: "Ayudó a mamá sin pedir" },
+  "Accepted 'No' first time": { pl: "Przyjął 'nie' za pierwszym razem", es: "Aceptó un 'no' a la primera" },
+  "Good sportsmanship": { pl: "Dobre zachowanie w grze", es: "Buen espíritu deportivo" },
+  "Honest about mistake": { pl: "Szczery po błędzie", es: "Honesto sobre un error" },
+  "Good behaviour": { pl: "Dobre zachowanie", es: "Buena conducta" },
+  "Apologised sincerely": { pl: "Szczerze przeprosił", es: "Pidió perdón sinceramente" },
+  "Included another child": { pl: "Włączył inne dziecko do zabawy", es: "Incluyó a otro niño" },
+  "Controlled frustration": { pl: "Opanował frustrację", es: "Controló la frustración" },
+  "Got up without reminders": { pl: "Wstał bez przypominania", es: "Se levantó sin recordatorios" },
+  "Bed left unmade": { pl: "Niepościelone łóżko", es: "Cama sin hacer" },
+  "Bedroom needs a reset": { pl: "Pokój wymaga ogarnięcia", es: "La habitación necesita orden" },
+  "Clothes left on bathroom floor": { pl: "Ubrania na podłodze w łazience", es: "Ropa en el suelo del baño" },
+  "Shoes left in hallway": { pl: "Buty zostawione w korytarzu", es: "Zapatos en el pasillo" },
+  "Plate left upstairs": { pl: "Talerz zostawiony na górze", es: "Plato dejado arriba" },
+  "Table area left messy": { pl: "Bałagan przy stole", es: "Zona de mesa desordenada" },
+  "Buddy walk missed": { pl: "Spacer Buddy'ego pominięty", es: "Paseo de Buddy pendiente" },
+  "Chore not finished": { pl: "Obowiązek niedokończony", es: "Tarea sin terminar" },
+  "Spoke disrespectfully": { pl: "Odezwał się bez szacunku", es: "Habló con falta de respeto" },
+  "Used rude language": { pl: "Użył brzydkich słów", es: "Usó lenguaje grosero" },
+  "Door slammed": { pl: "Trzaśnięcie drzwiami", es: "Portazo" },
+  "Instruction not followed": { pl: "Nie wykonał polecenia", es: "No siguió la instrucción" },
+  "Asked again after answer": { pl: "Pytał dalej po odpowiedzi", es: "Preguntó otra vez tras la respuesta" },
+  "Kept asking for YouTube": { pl: "Ciągle prosił o YouTube", es: "Insistió con YouTube" },
+  "Kept asking for phone": { pl: "Ciągle prosił o telefon", es: "Insistió con el móvil" },
+  "Kept asking for computer": { pl: "Ciągle prosił o komputer", es: "Insistió con el ordenador" },
+  "Asked for treats after refusing chores": { pl: "Prosił o słodycze po odmowie obowiązków", es: "Pidió premios tras rechazar tareas" },
+  "Found winning or losing hard": { pl: "Trudno przyjął wygraną lub przegraną", es: "Le costó ganar o perder" },
+  "Used threatening words": { pl: "Użył groźnych słów", es: "Usó palabras amenazantes" },
+  "Used unkind words": { pl: "Użył niemiłych słów", es: "Usó palabras poco amables" },
+  "Took frustration out on Buddy": { pl: "Wyładował frustrację na Buddym", es: "Descargó frustración con Buddy" },
+  "Apology refused": { pl: "Odmówił przeprosin", es: "Se negó a pedir perdón" }
+};
+
 let state = loadState();
 let selectedAccountId = state.selectedAccountId || null;
+let selectedLanguage = state.language || "en";
 let selectedTab = "log";
 let selectedDay = "monday";
 let behaviourFilter = "All";
@@ -121,10 +433,11 @@ function defaultAccount() {
 }
 
 function loadState() {
-  const fallback = { accounts: [defaultAccount()], selectedAccountId: null };
+  const fallback = { accounts: [defaultAccount()], selectedAccountId: null, language: "en" };
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
     if (!saved || !Array.isArray(saved.accounts)) return fallback;
+    saved.language = saved.language || "en";
     return saved;
   } catch {
     return fallback;
@@ -133,11 +446,37 @@ function loadState() {
 
 function saveState() {
   state.selectedAccountId = selectedAccountId;
+  state.language = selectedLanguage;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
 function clone(value) {
   return JSON.parse(JSON.stringify(value));
+}
+
+function t(key) {
+  return translations[selectedLanguage]?.[key] ?? translations.en[key] ?? key;
+}
+
+function nestedT(group, key) {
+  return translations[selectedLanguage]?.[group]?.[key] ?? translations.en[group]?.[key] ?? key;
+}
+
+function translated(value) {
+  return translatedText[value]?.[selectedLanguage] || value;
+}
+
+function languagePicker() {
+  return `
+    <label class="language-picker">
+      <span class="sr-only">Language</span>
+      <select id="language-select" aria-label="Language">
+        ${Object.entries(languages).map(([code, label]) => `
+          <option value="${code}" ${selectedLanguage === code ? "selected" : ""}>${esc(label)}</option>
+        `).join("")}
+      </select>
+    </label>
+  `;
 }
 
 function account() {
@@ -189,6 +528,18 @@ function rewardFor(score, current = account()) {
   return (levels.find(level => level.min <= score && score <= level.max) || levels[0]).reward;
 }
 
+function displayBehaviourName(name) {
+  return translated(name);
+}
+
+function displayCategory(category) {
+  return translated(category);
+}
+
+function displayReward(reward) {
+  return translated(reward);
+}
+
 function sign(value) {
   return value >= 0 ? `+${value}` : `${value}`;
 }
@@ -204,6 +555,7 @@ function esc(value) {
 }
 
 function render() {
+  document.documentElement.lang = selectedLanguage;
   const root = document.querySelector("#app");
   const current = account();
   root.innerHTML = current ? appView(current) : loginView();
@@ -218,36 +570,37 @@ function loginView() {
           <div class="brand-mark">RU</div>
           <div class="title-stack">
             <h1>RiseUp Kids</h1>
-            <p>Behaviour, XP and rewards</p>
+            <p>${t("appSubtitle")}</p>
           </div>
         </div>
+        ${languagePicker()}
       </section>
 
       <section class="card">
-        <h2>Log in</h2>
+        <h2>${t("login")}</h2>
         <label class="field">
-          <span>Account</span>
+          <span>${t("account")}</span>
           <select id="login-account">
             ${state.accounts.map(item => `<option value="${item.id}">${esc(item.name)} (${esc(item.child.name)})</option>`).join("")}
           </select>
         </label>
         <label class="field">
-          <span>PIN</span>
+          <span>${t("pin")}</span>
           <input id="login-pin" type="password" inputmode="numeric" placeholder="1234">
         </label>
-        <button class="primary" data-action="login">Log in</button>
+        <button class="primary" data-action="login">${t("login")}</button>
       </section>
 
       <section class="card">
-        <h2>Create account</h2>
-        <label class="field"><span>Parent name</span><input id="new-parent" placeholder="Parent"></label>
-        <label class="field"><span>Email</span><input id="new-email" type="email" placeholder="parent@email.com"></label>
-        <label class="field"><span>PIN</span><input id="new-pin" type="password" inputmode="numeric" placeholder="Create PIN"></label>
+        <h2>${t("createAccount")}</h2>
+        <label class="field"><span>${t("parentName")}</span><input id="new-parent" placeholder="${t("parent")}"></label>
+        <label class="field"><span>${t("email")}</span><input id="new-email" type="email" placeholder="parent@email.com"></label>
+        <label class="field"><span>${t("pin")}</span><input id="new-pin" type="password" inputmode="numeric" placeholder="${t("createPin")}"></label>
         <div class="grid-2">
-          <label class="field"><span>Child</span><input id="new-child" placeholder="Child name"></label>
-          <label class="field"><span>Age</span><input id="new-age" inputmode="numeric" placeholder="10"></label>
+          <label class="field"><span>${t("child")}</span><input id="new-child" placeholder="${t("childName")}"></label>
+          <label class="field"><span>${t("age")}</span><input id="new-age" inputmode="numeric" placeholder="10"></label>
         </div>
-        <button class="secondary" data-action="create-account">Create new account</button>
+        <button class="secondary" data-action="create-account">${t("createNewAccount")}</button>
       </section>
     </main>
   `;
@@ -262,17 +615,20 @@ function appView(current) {
           <div class="brand-mark">RU</div>
           <div class="title-stack">
             <h1>${esc(current.child.name)}</h1>
-            <p>${esc(current.name)}'s account</p>
+            <p>${esc(current.name)} ${t("accountSuffix")}</p>
           </div>
         </div>
-        <div class="xp-pill">${score} XP</div>
+        <div class="header-actions">
+          ${languagePicker()}
+          <div class="xp-pill">${score} XP</div>
+        </div>
       </header>
       ${tabView(current)}
     </main>
     <nav class="tabs">
       ${["log", "week", "rewards", "more"].map(tab => `
         <button class="tab ${selectedTab === tab ? "active" : ""}" data-tab="${tab}">
-          ${tab[0].toUpperCase()}${tab.slice(1)}
+          ${nestedT("tabs", tab)}
         </button>
       `).join("")}
     </nav>
@@ -292,13 +648,13 @@ function logView(current) {
   return `
     <section class="card">
       <div class="section-row">
-        <h2>Day</h2>
-        <span class="muted small">${selectedDay}</span>
+        <h2>${t("day")}</h2>
+        <span class="muted small">${nestedT("days", selectedDay)}</span>
       </div>
       <div class="day-strip">
         ${Object.keys(current.weeklyLogs).map(day => `
           <button class="day-button ${day === selectedDay ? "active" : ""}" data-day="${day}">
-            <strong>${day.slice(0, 3)}</strong>
+            <strong>${nestedT("shortDays", day)}</strong>
             <span>${sign(dayScore(day))}</span>
           </button>
         `).join("")}
@@ -307,26 +663,26 @@ function logView(current) {
 
     <section class="card">
       <div class="section-row">
-        <h2>${selectedDay[0].toUpperCase()}${selectedDay.slice(1)} total</h2>
+        <h2>${nestedT("days", selectedDay)} ${t("total")}</h2>
         <strong>${sign(dayScore(selectedDay))}</strong>
       </div>
       <div class="plain-list">
         ${log.behaviours.length ? log.behaviours.map((name, index) => `
           <div class="log-row">
             <div>
-              <strong>${esc(name)}</strong>
+              <strong>${esc(displayBehaviourName(name))}</strong>
               <span class="muted small">${sign(pointsFor(name))} XP</span>
             </div>
-            <button class="icon-button" data-remove-log="${index}" aria-label="Remove">x</button>
+            <button class="icon-button" data-remove-log="${index}" aria-label="${t("remove")}">x</button>
           </div>
-        `).join("") : `<div class="empty">Nothing recorded yet.</div>`}
+        `).join("") : `<div class="empty">${t("nothingRecorded")}</div>`}
       </div>
     </section>
 
     <section class="card">
       <div class="section-row">
-        <h2>Record behaviour</h2>
-        <span class="muted small">${shown.length} shown</span>
+        <h2>${t("recordBehaviour")}</h2>
+        <span class="muted small">${shown.length} ${t("shown")}</span>
       </div>
       ${segments("behaviour-filter", behaviourFilter)}
       <div class="behaviour-list">
@@ -335,9 +691,9 @@ function logView(current) {
     </section>
 
     <section class="card">
-      <h2>Notes</h2>
+      <h2>${t("notes")}</h2>
       <textarea id="notes">${esc(log.notes)}</textarea>
-      <button class="primary" data-action="save-notes">Save note</button>
+      <button class="primary" data-action="save-notes">${t("saveNote")}</button>
     </section>
   `;
 }
@@ -346,10 +702,10 @@ function weekView(current) {
   const score = weeklyScore(current);
   return `
     <section class="card">
-      <h2>Weekly summary</h2>
+      <h2>${t("weeklySummary")}</h2>
       <div class="xp-pill">${score} XP</div>
-      <p class="muted">${esc(rewardFor(score, current))}</p>
-      <p class="muted">Daily average: ${(score / 7).toFixed(1)} XP</p>
+      <p class="muted">${esc(displayReward(rewardFor(score, current)))}</p>
+      <p class="muted">${t("dailyAverage")}: ${(score / 7).toFixed(1)} XP</p>
     </section>
     ${Object.keys(current.weeklyLogs).map(day => {
       const scoreForDay = dayScore(day);
@@ -357,11 +713,11 @@ function weekView(current) {
       return `
         <section class="card">
           <div class="section-row">
-            <h2>${day[0].toUpperCase()}${day.slice(1)}</h2>
+            <h2>${nestedT("days", day)}</h2>
             <strong>${sign(scoreForDay)}</strong>
           </div>
           <div class="progress"><div style="width:${Math.min(100, Math.max(0, scoreForDay) / 8 * 100)}%"></div></div>
-          <p class="muted">${behaviours.length ? esc(behaviours.join(", ")) : "No behaviours yet"}</p>
+          <p class="muted">${behaviours.length ? esc(behaviours.map(displayBehaviourName).join(", ")) : t("noBehavioursYet")}</p>
         </section>
       `;
     }).join("")}
@@ -373,34 +729,34 @@ function rewardsView(current) {
   const unlocked = (current.rewardLevels || defaultRewards).some(level => level.min > 0 && score >= level.min);
   return `
     <section class="card">
-      <h2>Current reward</h2>
-      <p><strong>${esc(rewardFor(score, current))}</strong></p>
-      <p class="muted">${unlocked ? `${esc(current.child.name)} has unlocked a reward.` : `${esc(current.child.name)} has not unlocked a reward yet.`}</p>
+      <h2>${t("currentReward")}</h2>
+      <p><strong>${esc(displayReward(rewardFor(score, current)))}</strong></p>
+      <p class="muted">${(unlocked ? t("unlocked") : t("notUnlocked")).replace("{child}", esc(current.child.name))}</p>
     </section>
 
     <section class="card">
-      <h2>Add your own reward</h2>
-      <label class="field"><span>Reward</span><input id="reward-name" placeholder="Choose movie night"></label>
+      <h2>${t("addOwnReward")}</h2>
+      <label class="field"><span>${t("reward")}</span><input id="reward-name" placeholder="${nestedT("placeholders", "reward")}"></label>
       <div class="grid-2">
-        <label class="field"><span>Min XP</span><input id="reward-min" inputmode="numeric" placeholder="8"></label>
-        <label class="field"><span>Max XP</span><input id="reward-max" inputmode="numeric" placeholder="13"></label>
+        <label class="field"><span>${t("minXp")}</span><input id="reward-min" inputmode="numeric" placeholder="8"></label>
+        <label class="field"><span>${t("maxXp")}</span><input id="reward-max" inputmode="numeric" placeholder="13"></label>
       </div>
       <div class="toolbar">
-        <button class="primary" data-action="add-reward">Add reward</button>
-        <button class="secondary" data-action="reset-rewards">Reset defaults</button>
+        <button class="primary" data-action="add-reward">${t("addReward")}</button>
+        <button class="secondary" data-action="reset-rewards">${t("resetDefaults")}</button>
       </div>
     </section>
 
     <section class="card">
-      <h2>Reward levels</h2>
+      <h2>${t("rewardLevels")}</h2>
       <div class="plain-list">
         ${[...(current.rewardLevels || defaultRewards)].sort((a, b) => a.min - b.min).map(level => `
           <div class="reward-row">
             <div>
-              <strong>${esc(level.reward)}</strong>
+              <strong>${esc(displayReward(level.reward))}</strong>
               <span class="muted small">${level.min}-${level.max} XP</span>
             </div>
-            ${level.min > 0 ? `<button class="icon-button" data-remove-reward="${level.id}" aria-label="Remove">x</button>` : ""}
+            ${level.min > 0 ? `<button class="icon-button" data-remove-reward="${level.id}" aria-label="${t("remove")}">x</button>` : ""}
           </div>
         `).join("")}
       </div>
@@ -412,52 +768,55 @@ function moreView(current) {
   const shown = visibleBehaviours().filter(item => catalogueFilter === "All" || item.type === catalogueFilter);
   return `
     <section class="card">
-      <h2>Add your own behaviour</h2>
-      <label class="field"><span>Name</span><input id="custom-name" placeholder="Packed school bag"></label>
-      <label class="field"><span>Category</span><input id="custom-category" placeholder="Responsibility"></label>
+      <h2>${t("addOwnBehaviour")}</h2>
+      <label class="field"><span>${t("name")}</span><input id="custom-name" placeholder="${nestedT("placeholders", "behaviour")}"></label>
+      <label class="field"><span>${t("category")}</span><input id="custom-category" placeholder="${nestedT("placeholders", "category")}"></label>
       <div class="grid-2">
         <label class="field">
-          <span>Type</span>
-          <select id="custom-type"><option>Bonus</option><option>Deduction</option></select>
+          <span>${t("type")}</span>
+          <select id="custom-type">
+            <option value="Bonus">${t("bonus")}</option>
+            <option value="Deduction">${t("deduction")}</option>
+          </select>
         </label>
-        <label class="field"><span>Points</span><input id="custom-points" inputmode="numeric" placeholder="1"></label>
+        <label class="field"><span>${t("points")}</span><input id="custom-points" inputmode="numeric" placeholder="1"></label>
       </div>
-      <button class="primary" data-action="add-behaviour">Add behaviour</button>
+      <button class="primary" data-action="add-behaviour">${t("addBehaviour")}</button>
     </section>
 
     <section class="card">
       <div class="section-row">
-        <h2>Behaviour catalogue</h2>
-        <span class="muted small">${shown.length} shown</span>
+        <h2>${t("behaviourCatalogue")}</h2>
+        <span class="muted small">${shown.length} ${t("shown")}</span>
       </div>
       ${segments("catalogue-filter", catalogueFilter)}
       <div class="behaviour-list">
         ${shown.map(behaviour => behaviourButton(behaviour, "hide")).join("")}
       </div>
-      <button class="secondary" data-action="restore-behaviours">Restore hidden behaviours</button>
+      <button class="secondary" data-action="restore-behaviours">${t("restoreHidden")}</button>
     </section>
 
     <section class="card">
-      <h2>Week tools</h2>
-      <button class="secondary" data-action="archive-week">Save week and start fresh</button>
+      <h2>${t("weekTools")}</h2>
+      <button class="secondary" data-action="archive-week">${t("archiveWeek")}</button>
     </section>
 
     <section class="card">
-      <h2>Past weeks</h2>
+      <h2>${t("pastWeeks")}</h2>
       <div class="plain-list">
         ${current.pastWeeks.length ? current.pastWeeks.map(week => `
           <div class="reward-row">
             <div>
               <strong>${esc(week.weekStart)} to ${esc(week.weekEnd)}</strong>
-              <span class="muted small">${week.score} XP - ${esc(week.reward)}</span>
+              <span class="muted small">${week.score} XP - ${esc(displayReward(week.reward))}</span>
             </div>
           </div>
-        `).join("") : `<div class="empty">No past weeks yet.</div>`}
+        `).join("") : `<div class="empty">${t("noPastWeeks")}</div>`}
       </div>
     </section>
 
     <section class="card">
-      <button class="danger" data-action="logout">Log out</button>
+      <button class="danger" data-action="logout">${t("logout")}</button>
     </section>
   `;
 }
@@ -465,7 +824,11 @@ function moreView(current) {
 function segments(kind, value) {
   return `
     <div class="segments" data-segments="${kind}">
-      ${["All", "Bonus", "Deduction"].map(item => `<button class="${value === item ? "active" : ""}" data-value="${item}">${item === "Deduction" ? "Deductions" : item}</button>`).join("")}
+      ${["All", "Bonus", "Deduction"].map(item => `
+        <button class="${value === item ? "active" : ""}" data-value="${item}">
+          ${item === "All" ? t("all") : item === "Bonus" ? t("bonus") : t("deductions")}
+        </button>
+      `).join("")}
     </div>
   `;
 }
@@ -475,8 +838,8 @@ function behaviourButton(behaviour, mode) {
     <div class="behaviour-row">
       <button class="behaviour-row" data-${mode === "record" ? "record" : "hide"}="${behaviour.id}">
         <div>
-          <strong>${esc(behaviour.name)}</strong>
-          <span class="muted small">${esc(behaviour.category)}</span>
+          <strong>${esc(displayBehaviourName(behaviour.name))}</strong>
+          <span class="muted small">${esc(displayCategory(behaviour.category))}</span>
         </div>
         <span class="point ${behaviour.points < 0 ? "negative" : ""}">${sign(behaviour.points)}</span>
       </button>
@@ -485,6 +848,15 @@ function behaviourButton(behaviour, mode) {
 }
 
 function bindEvents() {
+  const languageSelect = document.querySelector("#language-select");
+  if (languageSelect) {
+    languageSelect.addEventListener("change", () => {
+      selectedLanguage = languageSelect.value;
+      saveState();
+      render();
+    });
+  }
+
   document.querySelectorAll("[data-tab]").forEach(button => {
     button.addEventListener("click", () => {
       selectedTab = button.dataset.tab;
@@ -562,7 +934,7 @@ function handleAction(action) {
     const pin = document.querySelector("#login-pin").value;
     const found = state.accounts.find(item => item.id === id);
     if (!found || found.pin !== pin) {
-      alert("Wrong PIN.");
+      alert(t("wrongPin"));
       return;
     }
     selectedAccountId = found.id;
@@ -602,7 +974,7 @@ function handleAction(action) {
     account().customBehaviours.push({
       id: id(),
       name,
-      category: document.querySelector("#custom-category").value.trim() || "Custom",
+      category: document.querySelector("#custom-category").value.trim() || t("custom"),
       type,
       points: type === "Deduction" ? -rawPoints : rawPoints
     });
