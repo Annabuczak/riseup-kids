@@ -9,11 +9,11 @@ function id() {
 }
 
 const defaultRewards = [
-  { id: id(), min: 0, max: 7, reward: "No weekly reward yet" },
-  { id: id(), min: 8, max: 13, reward: "Small treat with Mum" },
-  { id: id(), min: 14, max: 21, reward: "Extra screen-time pass" },
-  { id: id(), min: 22, max: 29, reward: "Pick a weekend activity" },
-  { id: id(), min: 30, max: 100, reward: "Choose a family night" }
+  { id: id(), min: 0, max: 34, reward: "No weekly reward yet" },
+  { id: id(), min: 35, max: 49, reward: "Small treat with Mum" },
+  { id: id(), min: 50, max: 69, reward: "Extra screen-time pass" },
+  { id: id(), min: 70, max: 89, reward: "Pick a weekend activity" },
+  { id: id(), min: 90, max: 100, reward: "Choose a family night" }
 ];
 
 const defaultBehaviours = [
@@ -473,15 +473,31 @@ function loadState() {
 }
 
 function migrateAccount(item) {
+  const rewardLevels = Array.isArray(item.rewardLevels) ? item.rewardLevels : clone(defaultRewards);
   return {
     ...item,
     customBehaviours: Array.isArray(item.customBehaviours) ? item.customBehaviours : [],
     hiddenBehaviours: Array.isArray(item.hiddenBehaviours) ? item.hiddenBehaviours : [],
     behaviourOverrides: item.behaviourOverrides && typeof item.behaviourOverrides === "object" ? item.behaviourOverrides : {},
-    rewardLevels: Array.isArray(item.rewardLevels) ? item.rewardLevels : clone(defaultRewards),
+    rewardLevels: usesOldDefaultRewards(rewardLevels) ? clone(defaultRewards) : rewardLevels,
     weeklyLogs: item.weeklyLogs || blankLogs(),
     pastWeeks: Array.isArray(item.pastWeeks) ? item.pastWeeks : []
   };
+}
+
+function usesOldDefaultRewards(levels) {
+  const oldMins = [0, 8, 14, 22, 30];
+  const oldRewards = [
+    "No weekly reward yet",
+    "Small treat with Mum",
+    "Extra screen-time pass",
+    "Pick a weekend activity",
+    "Choose a family night"
+  ];
+
+  return levels.length === oldMins.length && levels.every((level, index) => {
+    return Number(level.min) === oldMins[index] && level.reward === oldRewards[index];
+  });
 }
 
 function saveState() {
@@ -675,6 +691,7 @@ function loginView() {
 
 function appView(current) {
   const score = weeklyScore(current);
+  const currentReward = displayReward(rewardFor(score, current));
   return `
     <main class="shell">
       <header class="topbar">
@@ -687,7 +704,13 @@ function appView(current) {
         </div>
         <div class="header-actions">
           ${languagePicker()}
-          <div class="xp-pill">${score} XP</div>
+          <div class="score-card">
+            <div class="xp-pill">${score} XP</div>
+            <div class="reward-chip">
+              <span>${t("currentReward")}</span>
+              <strong>${esc(currentReward)}</strong>
+            </div>
+          </div>
         </div>
       </header>
       ${tabView(current)}
