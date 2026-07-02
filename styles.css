@@ -125,6 +125,28 @@ button {
   margin-top: 4px;
 }
 
+.profile-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.profile-line p {
+  margin-top: 0;
+}
+
+.text-button {
+  min-height: 32px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: var(--panel-2);
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 850;
+}
+
 .xp-pill {
   min-width: 82px;
   padding: 12px 14px;
@@ -452,6 +474,23 @@ textarea:focus {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+.toast {
+  position: fixed;
+  right: 16px;
+  bottom: calc(86px + env(safe-area-inset-bottom));
+  left: 16px;
+  z-index: 20;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 13px 15px;
+  border-radius: 14px;
+  background: var(--ink);
+  color: white;
+  font-weight: 800;
+  text-align: center;
+  box-shadow: var(--shadow);
 }
 
 @media (min-width: 700px) {

@@ -111,6 +111,7 @@ const translations = {
     remove: "Remove",
     nothingRecorded: "Nothing recorded yet.",
     recordBehaviour: "Record behaviour",
+    behaviourRecorded: "{behaviour} recorded for {day} ({points} XP).",
     shown: "shown",
     notes: "Notes",
     saveNote: "Save note",
@@ -199,6 +200,7 @@ const translations = {
     remove: "Usuń",
     nothingRecorded: "Jeszcze nic nie dodano.",
     recordBehaviour: "Dodaj zachowanie",
+    behaviourRecorded: "Dodano {behaviour} na {day} ({points} XP).",
     shown: "widoczne",
     notes: "Notatki",
     saveNote: "Zapisz notatkę",
@@ -287,6 +289,7 @@ const translations = {
     remove: "Quitar",
     nothingRecorded: "Nada registrado todavía.",
     recordBehaviour: "Registrar conducta",
+    behaviourRecorded: "{behaviour} registrado para {day} ({points} XP).",
     shown: "visibles",
     notes: "Notas",
     saveNote: "Guardar nota",
@@ -418,13 +421,17 @@ const translatedText = {
   "Apology refused": { pl: "Odmówił przeprosin", es: "Se negó a pedir perdón" }
 };
 
+const weekDays = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
+
 let state = loadState();
 let selectedAccountId = state.selectedAccountId || null;
 let selectedLanguage = state.language || "en";
 let selectedTab = "log";
-let selectedDay = "monday";
+let selectedDay = todayDay();
 let behaviourFilter = "All";
 let catalogueFilter = "All";
+let toastMessage = "";
+let toastTimer = null;
 
 function todayMonday() {
   const today = new Date();
@@ -435,8 +442,12 @@ function todayMonday() {
   return monday.toISOString().slice(0, 10);
 }
 
+function todayDay() {
+  return weekDays[(new Date().getDay() || 7) - 1];
+}
+
 function blankLogs() {
-  return ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"].reduce((logs, day) => {
+  return weekDays.reduce((logs, day) => {
     logs[day] = { notes: "", behaviours: [] };
     return logs;
   }, {});
@@ -641,8 +652,12 @@ function render() {
   document.documentElement.lang = selectedLanguage;
   const root = document.querySelector("#app");
   const current = account();
-  root.innerHTML = current ? appView(current) : loginView();
+  root.innerHTML = `${current ? appView(current) : loginView()}${toastView()}`;
   bindEvents();
+}
+
+function toastView() {
+  return toastMessage ? `<div class="toast" role="status">${esc(toastMessage)}</div>` : "";
 }
 
 function loginView() {
@@ -699,7 +714,10 @@ function appView(current) {
           <div class="brand-mark">RU</div>
           <div class="title-stack">
             <h1>${esc(current.child.name)}</h1>
-            <p>${esc(current.name)} ${t("accountSuffix")}</p>
+            <div class="profile-line">
+              <p>${esc(current.name)} ${t("accountSuffix")}</p>
+              <button class="text-button" data-action="logout">${t("logout")}</button>
+            </div>
           </div>
         </div>
         <div class="header-actions">
@@ -999,7 +1017,10 @@ function bindEvents() {
       if (!found) return;
       account().weeklyLogs[selectedDay].behaviours.push(found.sourceName || found.name);
       saveState();
-      render();
+      showToast(t("behaviourRecorded")
+        .replace("{behaviour}", displayBehaviourName(found.name))
+        .replace("{day}", nestedT("days", selectedDay))
+        .replace("{points}", sign(found.points)));
     });
   });
 
@@ -1054,6 +1075,7 @@ function handleAction(action) {
       return;
     }
     selectedAccountId = found.id;
+    selectedDay = todayDay();
     checkWeek();
   }
 
@@ -1077,6 +1099,7 @@ function handleAction(action) {
     };
     state.accounts.push(newAccount);
     selectedAccountId = newAccount.id;
+    selectedDay = todayDay();
   }
 
   if (action === "save-notes") {
@@ -1167,6 +1190,16 @@ function editBehaviour(behaviour) {
   render();
 }
 
+function showToast(message) {
+  toastMessage = message;
+  if (toastTimer) clearTimeout(toastTimer);
+  render();
+  toastTimer = setTimeout(() => {
+    toastMessage = "";
+    render();
+  }, 2400);
+}
+
 function archiveWeek() {
   const current = account();
   const score = weeklyScore(current);
@@ -1183,7 +1216,7 @@ function archiveWeek() {
   });
   current.currentWeekStart = todayMonday();
   current.weeklyLogs = blankLogs();
-  selectedDay = "monday";
+  selectedDay = todayDay();
 }
 
 function checkWeek() {

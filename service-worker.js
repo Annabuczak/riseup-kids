@@ -1,4 +1,4 @@
-const CACHE_NAME = "riseup-kids-v4";
+const CACHE_NAME = "riseup-kids-v5";
 const ASSETS = [
   "./",
   "./index.html",
