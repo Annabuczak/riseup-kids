@@ -1,18 +1,57 @@
-# RiseUp Kids PWA
+🌟 RiseUp Kids
 
-Mobile-first behaviour, XP, notes, and rewards tracker.
+A Python application that helps parents track children’s behaviour, award points, and unlock weekly rewards.
 
-## Run locally
+This project was developed as part of my Object-Oriented Programming module while studying for a BSc (Hons) in Cyber Security. Rather than building a traditional tutorial project, I wanted to create something inspired by a real-life problem.
 
-```bash
-python3 -m http.server 8091 --bind 0.0.0.0
-```
+Features
 
-Open `http://localhost:8091/` on the Mac, or open the Mac's local network IP from an iPhone on the same Wi-Fi.
+* Parent accounts with PIN login
+* Behaviour tracking
+* Positive and negative point system
+* Weekly rewards
+* Daily notes
+* Weekly summaries
+* Previous week history
+* Custom behaviours
+* JSON data storage
+* CSV export
 
-## Deploy to Netlify
+Technologies
 
-Drag this folder, or the generated `riseup-kids-pwa-netlify.zip`, into Netlify Drop.
+* Python 3
+* Object-Oriented Programming
+* JSON
+* CSV
 
-The app stores data locally in each browser/device using `localStorage`.
-kk
+Running the project
+
+Clone the repository:
+
+git clone https://github.com/Annabuczak/riseup-kids.git
+
+Run the application:
+
+python main.py
+
+What I learned
+
+This project strengthened my understanding of:
+
+* Object-Oriented Programming
+* Working with multiple classes
+* File handling
+* JSON data persistence
+* Program design and problem solving
+
+Future improvements
+
+* Split the project into multiple modules
+* Add type hints
+* Add unit tests
+* Build a graphical interface
+* Improve the overall user experience
+
+⸻
+
+Thank you for taking the time to view my project. Feedback and suggestions are always welcome!
