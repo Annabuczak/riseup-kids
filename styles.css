@@ -341,6 +341,32 @@ textarea:focus {
   text-align: left;
 }
 
+.manage-row {
+  align-items: center;
+}
+
+.behaviour-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.mini-button {
+  min-height: 38px;
+  padding: 0 12px;
+  border-radius: 11px;
+  background: var(--teal-2);
+  color: var(--teal);
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.danger-mini {
+  background: var(--red-2);
+  color: var(--red);
+}
+
 .behaviour-row strong,
 .log-row strong,
 .reward-row strong {
@@ -418,5 +444,18 @@ textarea:focus {
 
   .language-picker select {
     font-size: 13px;
+  }
+
+  .manage-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .behaviour-actions {
+    justify-content: stretch;
+  }
+
+  .mini-button {
+    flex: 1;
   }
 }

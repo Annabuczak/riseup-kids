@@ -53,10 +53,12 @@ const defaultBehaviours = [
   ["Apology refused", "Kindness", "Deduction", -2]
 ].map(([name, category, type, points]) => ({
   id: id(),
+  sourceName: name,
   name,
   category,
   type,
-  points
+  points,
+  isDefault: true
 }));
 
 const aliases = {
@@ -133,6 +135,14 @@ const translations = {
     addBehaviour: "Add behaviour",
     behaviourCatalogue: "Behaviour catalogue",
     restoreHidden: "Restore hidden behaviours",
+    resetBehaviourEdits: "Reset behaviour edits",
+    edit: "Edit",
+    hide: "Hide",
+    editBehaviour: "Edit behaviour",
+    editNamePrompt: "Behaviour name",
+    editCategoryPrompt: "Category",
+    editTypePrompt: "Type: Bonus or Deduction",
+    editPointsPrompt: "Points",
     weekTools: "Week tools",
     archiveWeek: "Save week and start fresh",
     pastWeeks: "Past weeks",
@@ -213,6 +223,14 @@ const translations = {
     addBehaviour: "Dodaj zachowanie",
     behaviourCatalogue: "Lista zachowań",
     restoreHidden: "Przywróć ukryte zachowania",
+    resetBehaviourEdits: "Cofnij zmiany zachowań",
+    edit: "Edytuj",
+    hide: "Ukryj",
+    editBehaviour: "Edytuj zachowanie",
+    editNamePrompt: "Nazwa zachowania",
+    editCategoryPrompt: "Kategoria",
+    editTypePrompt: "Typ: Bonus albo Deduction",
+    editPointsPrompt: "Punkty",
     weekTools: "Narzędzia tygodnia",
     archiveWeek: "Zapisz tydzień i zacznij od nowa",
     pastWeeks: "Poprzednie tygodnie",
@@ -293,6 +311,14 @@ const translations = {
     addBehaviour: "Añadir conducta",
     behaviourCatalogue: "Catálogo de conductas",
     restoreHidden: "Restaurar conductas ocultas",
+    resetBehaviourEdits: "Restaurar cambios",
+    edit: "Editar",
+    hide: "Ocultar",
+    editBehaviour: "Editar conducta",
+    editNamePrompt: "Nombre de la conducta",
+    editCategoryPrompt: "Categoría",
+    editTypePrompt: "Tipo: Bonus o Deduction",
+    editPointsPrompt: "Puntos",
     weekTools: "Herramientas de semana",
     archiveWeek: "Guardar semana y empezar de nuevo",
     pastWeeks: "Semanas anteriores",
@@ -425,6 +451,7 @@ function defaultAccount() {
     child: { name: "Louie", age: 10 },
     customBehaviours: [],
     hiddenBehaviours: [],
+    behaviourOverrides: {},
     rewardLevels: clone(defaultRewards),
     currentWeekStart: todayMonday(),
     weeklyLogs: blankLogs(),
@@ -438,10 +465,23 @@ function loadState() {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
     if (!saved || !Array.isArray(saved.accounts)) return fallback;
     saved.language = saved.language || "en";
+    saved.accounts = saved.accounts.map(migrateAccount);
     return saved;
   } catch {
     return fallback;
   }
+}
+
+function migrateAccount(item) {
+  return {
+    ...item,
+    customBehaviours: Array.isArray(item.customBehaviours) ? item.customBehaviours : [],
+    hiddenBehaviours: Array.isArray(item.hiddenBehaviours) ? item.hiddenBehaviours : [],
+    behaviourOverrides: item.behaviourOverrides && typeof item.behaviourOverrides === "object" ? item.behaviourOverrides : {},
+    rewardLevels: Array.isArray(item.rewardLevels) ? item.rewardLevels : clone(defaultRewards),
+    weeklyLogs: item.weeklyLogs || blankLogs(),
+    pastWeeks: Array.isArray(item.pastWeeks) ? item.pastWeeks : []
+  };
 }
 
 function saveState() {
@@ -490,7 +530,22 @@ function normalise(name) {
 
 function behaviourLibrary() {
   const current = account();
-  return [...defaultBehaviours, ...((current && current.customBehaviours) || [])];
+  const overrides = (current && current.behaviourOverrides) || {};
+  const defaults = defaultBehaviours.map(behaviour => {
+    const sourceName = behaviour.sourceName || behaviour.name;
+    return {
+      ...behaviour,
+      ...(overrides[normalise(sourceName)] || {}),
+      sourceName,
+      isDefault: true
+    };
+  });
+  const custom = ((current && current.customBehaviours) || []).map(behaviour => ({
+    ...behaviour,
+    sourceName: behaviour.sourceName || behaviour.name,
+    isDefault: false
+  }));
+  return [...defaults, ...custom];
 }
 
 function visibleBehaviours() {
@@ -499,17 +554,27 @@ function visibleBehaviours() {
   const seen = new Set();
 
   return behaviourLibrary().filter(behaviour => {
-    const key = normalise(behaviour.name);
-    if (hidden.has(key) || seen.has(key)) return false;
-    seen.add(key);
+    const key = normalise(behaviour.sourceName || behaviour.name);
+    const displayKey = normalise(behaviour.name);
+    if (hidden.has(key) || hidden.has(displayKey) || seen.has(displayKey)) return false;
+    seen.add(displayKey);
     return true;
   });
 }
 
 function pointsFor(name) {
   const key = normalise(name);
-  const found = behaviourLibrary().find(behaviour => normalise(behaviour.name) === key);
+  const found = behaviourLibrary().find(behaviour => {
+    return normalise(behaviour.name) === key || normalise(behaviour.sourceName) === key;
+  });
   return found ? found.points : 0;
+}
+
+function behaviourForName(name) {
+  const key = normalise(name);
+  return behaviourLibrary().find(behaviour => {
+    return normalise(behaviour.name) === key || normalise(behaviour.sourceName) === key;
+  });
 }
 
 function dayScore(day) {
@@ -529,6 +594,8 @@ function rewardFor(score, current = account()) {
 }
 
 function displayBehaviourName(name) {
+  const behaviour = behaviourForName(name);
+  if (behaviour) return translated(behaviour.name);
   return translated(name);
 }
 
@@ -791,9 +858,12 @@ function moreView(current) {
       </div>
       ${segments("catalogue-filter", catalogueFilter)}
       <div class="behaviour-list">
-        ${shown.map(behaviour => behaviourButton(behaviour, "hide")).join("")}
+        ${shown.map(behaviour => behaviourButton(behaviour, "manage")).join("")}
       </div>
-      <button class="secondary" data-action="restore-behaviours">${t("restoreHidden")}</button>
+      <div class="toolbar">
+        <button class="secondary" data-action="restore-behaviours">${t("restoreHidden")}</button>
+        <button class="secondary" data-action="reset-behaviour-edits">${t("resetBehaviourEdits")}</button>
+      </div>
     </section>
 
     <section class="card">
@@ -834,6 +904,21 @@ function segments(kind, value) {
 }
 
 function behaviourButton(behaviour, mode) {
+  if (mode === "manage") {
+    return `
+      <div class="behaviour-row manage-row">
+        <div>
+          <strong>${esc(displayBehaviourName(behaviour.name))}</strong>
+          <span class="muted small">${esc(displayCategory(behaviour.category))} · ${sign(behaviour.points)} XP</span>
+        </div>
+        <div class="behaviour-actions">
+          <button class="mini-button" data-edit="${behaviour.id}">${t("edit")}</button>
+          <button class="mini-button danger-mini" data-hide="${behaviour.id}">${t("hide")}</button>
+        </div>
+      </div>
+    `;
+  }
+
   return `
     <div class="behaviour-row">
       <button class="behaviour-row" data-${mode === "record" ? "record" : "hide"}="${behaviour.id}">
@@ -889,7 +974,7 @@ function bindEvents() {
     button.addEventListener("click", () => {
       const found = visibleBehaviours().find(item => item.id === button.dataset.record);
       if (!found) return;
-      account().weeklyLogs[selectedDay].behaviours.push(found.name);
+      account().weeklyLogs[selectedDay].behaviours.push(found.sourceName || found.name);
       saveState();
       render();
     });
@@ -901,9 +986,17 @@ function bindEvents() {
       if (!found) return;
       const current = account();
       current.hiddenBehaviours = current.hiddenBehaviours || [];
-      current.hiddenBehaviours.push(found.name);
+      current.hiddenBehaviours.push(found.sourceName || found.name);
       saveState();
       render();
+    });
+  });
+
+  document.querySelectorAll("[data-edit]").forEach(button => {
+    button.addEventListener("click", () => {
+      const found = visibleBehaviours().find(item => item.id === button.dataset.edit);
+      if (!found) return;
+      editBehaviour(found);
     });
   });
 
@@ -953,6 +1046,7 @@ function handleAction(action) {
       },
       customBehaviours: [],
       hiddenBehaviours: [],
+      behaviourOverrides: {},
       rewardLevels: clone(defaultRewards),
       currentWeekStart: todayMonday(),
       weeklyLogs: blankLogs(),
@@ -976,7 +1070,8 @@ function handleAction(action) {
       name,
       category: document.querySelector("#custom-category").value.trim() || t("custom"),
       type,
-      points: type === "Deduction" ? -rawPoints : rawPoints
+      points: type === "Deduction" ? -rawPoints : rawPoints,
+      sourceName: name
     });
   }
 
@@ -996,12 +1091,53 @@ function handleAction(action) {
     account().hiddenBehaviours = [];
   }
 
+  if (action === "reset-behaviour-edits") {
+    account().behaviourOverrides = {};
+  }
+
   if (action === "archive-week") {
     archiveWeek();
   }
 
   if (action === "logout") {
     selectedAccountId = null;
+  }
+
+  saveState();
+  render();
+}
+
+function editBehaviour(behaviour) {
+  const current = account();
+  const name = prompt(t("editNamePrompt"), behaviour.name);
+  if (name === null || !name.trim()) return;
+
+  const category = prompt(t("editCategoryPrompt"), behaviour.category);
+  if (category === null) return;
+
+  const typeInput = prompt(t("editTypePrompt"), behaviour.type);
+  if (typeInput === null) return;
+  const type = /^d/i.test(typeInput.trim()) ? "Deduction" : "Bonus";
+
+  const pointsInput = prompt(t("editPointsPrompt"), String(Math.abs(behaviour.points)));
+  if (pointsInput === null) return;
+  const rawPoints = Math.abs(Number(pointsInput) || Math.abs(behaviour.points));
+
+  const updated = {
+    name: name.trim(),
+    category: category.trim() || t("custom"),
+    type,
+    points: type === "Deduction" ? -rawPoints : rawPoints
+  };
+
+  if (behaviour.isDefault) {
+    current.behaviourOverrides = current.behaviourOverrides || {};
+    current.behaviourOverrides[normalise(behaviour.sourceName || behaviour.name)] = updated;
+  } else {
+    current.customBehaviours = (current.customBehaviours || []).map(item => {
+      if (item.id !== behaviour.id) return item;
+      return { ...item, ...updated, sourceName: item.sourceName || item.name };
+    });
   }
 
   saveState();
