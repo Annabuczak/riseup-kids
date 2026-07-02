@@ -15,3 +15,4 @@ Open `http://localhost:8091/` on the Mac, or open the Mac's local network IP fro
 Drag this folder, or the generated `riseup-kids-pwa-netlify.zip`, into Netlify Drop.
 
 The app stores data locally in each browser/device using `localStorage`.
+kk
