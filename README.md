@@ -1,57 +1,49 @@
-🌟 RiseUp Kids
+# RiseUp Kids PWA
 
-A Python application that helps parents track children’s behaviour, award points, and unlock weekly rewards.
+A small browser-based behaviour tracking app for parents, built with HTML, CSS, and JavaScript.
 
-This project was developed as part of my Object-Oriented Programming module while studying for a BSc (Hons) in Cyber Security. Rather than building a traditional tutorial project, I wanted to create something inspired by a real-life problem.
+The app helps track daily behaviours, award or deduct points, review weekly progress, and manage reward bands. It stores data locally in the browser and can be installed as a lightweight progressive web app.
 
-Features
+## Features
 
-* Parent accounts with PIN login
-* Behaviour tracking
-* Positive and negative point system
-* Weekly rewards
-* Daily notes
-* Weekly summaries
-* Previous week history
-* Custom behaviours
-* JSON data storage
-* CSV export
+- Behaviour tracking
+- Bonus and deduction points
+- Weekly reward bands
+- Daily notes
+- Local browser storage
+- Installable PWA structure
+- Responsive interface
 
-Technologies
+## Technologies
 
-* Python 3
-* Object-Oriented Programming
-* JSON
-* CSV
+- HTML
+- CSS
+- JavaScript
+- Service worker
+- Web app manifest
+- Netlify deployment configuration
 
-Running the project
+## Running Locally
 
 Clone the repository:
 
-git clone https://github.com/Annabuczak/riseup-kids.git
+```bash
+git clone https://github.com/Annabuczak/riseup-kids-pwa.git
+```
 
-Run the application:
+Open `index.html` in a browser, or serve the folder with a small local web server.
 
-python main.py
+## What I Learned
 
-What I learned
+- DOM manipulation
+- Browser local storage
+- Progressive web app structure
+- Designing a practical tool around a real-life use case
+- Keeping a small front-end project organised
 
-This project strengthened my understanding of:
+## Future Improvements
 
-* Object-Oriented Programming
-* Working with multiple classes
-* File handling
-* JSON data persistence
-* Program design and problem solving
-
-Future improvements
-
-* Split the project into multiple modules
-* Add type hints
-* Add unit tests
-* Build a graphical interface
-* Improve the overall user experience
-
-⸻
-
-Thank you for taking the time to view my project. Feedback and suggestions are always welcome!
+- Add export and import options
+- Add stronger accessibility checks
+- Add automated UI tests
+- Improve install prompts and offline handling
